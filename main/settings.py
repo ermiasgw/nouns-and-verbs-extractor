@@ -1,17 +1,15 @@
 from pathlib import Path
 import os
-import environ
+from dotenv import load_dotenv
 
-
-env = environ.Env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = env('DEBUG')
+DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -66,9 +64,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'CLIENT': {
-            'host': env('DATABASE_HOST'),
-            'name': env('DATABASE_NAME'),
-            'authMechanism': env('AUTH_MECHANISM')
+            'host': os.getenv('DATABASE_HOST'),
+            'name': os.getenv('DATABASE_NAME'),
+            'authMechanism': os.getenv('AUTH_MECHANISM')
         } 
     }
 }
